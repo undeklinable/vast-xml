@@ -100,7 +100,7 @@ var xml = function(options) {
         });
       });
     if (ad.Extensions) {
-      var extensions = inline.element('Extensions');
+      var extensions = (ad.structure === 'wrapper') ? wrapper.element('Extensions') : inline.element('Extensions');
       [].concat(ad.Extensions).forEach(function(extension) {
         extensions.element('Extension').raw(extension);
       });
