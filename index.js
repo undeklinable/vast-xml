@@ -9,13 +9,17 @@ class VAST {
   constructor(settings = {}) {
     this.version = settings.version || DEFAULT_VAST_VERSION;
     this.VASTErrorURI = settings.VASTErrorURI;
-    this.ads = [];
+    this._ads = [];
   }
 
   attachAd(settings = {}) {
     const ad = new Ad(settings);
-    this.ads.push(ad);
+    this._ads.push(ad);
     return ad;
+  }
+
+  get ads() {
+    return this._ads;
   }
 
   xml(options = {}) {
@@ -24,7 +28,7 @@ class VAST {
     xmlResponse.initVastDocument(this.version)
       .attachErrorUri(this.VASTErrorURI);
 
-    this.ads.forEach(ad => {
+    this._ads.forEach(ad => {
       xmlResponse.attachAd(xmlResponse, ad);
 
       insertLinearCreative(ad, track, creatives);
