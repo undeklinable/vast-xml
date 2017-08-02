@@ -17,7 +17,7 @@ var nonLinear = ad.attachCreative('NonLinear', {
   , apiFramework : 'VPAID'
 });
 
-test('Create non-linear creative', function(t) {
+test('Create non-linear ad', function(t) {
   t.equal(nonLinear.attributes.id, 99, 'It should set id of consistent with the creation of the object');
   t.equal(nonLinear.attributes.width, 90, 'It should set width of consistent with the creation of the object');
   t.equal(nonLinear.attributes.height,10, 'It should set height of consistent with the creation of the object');
@@ -31,7 +31,7 @@ test('Create non-linear creative', function(t) {
   t.end();
 });
 
-test('Attach resource to Non-Linear creative', function(t){
+test('Attach resource to Non-Linear ad', function(t){
   nonLinear.attachResource('StaticResource', 'http://example.com/file.png', 'image/png');
   t.equal(nonLinear.resources.length, 1, 'It should add resources');
   t.equal(nonLinear.resources[0].type, 'StaticResource', 'It should store the type');

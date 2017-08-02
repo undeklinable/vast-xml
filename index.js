@@ -1,7 +1,7 @@
 'use strict';
 
 const XmlWriter = require('./lib/xml/xmlWriter');
-const Ad = require('./lib/ad');
+const Ad = require('./lib/ad/ad');
 
 const DEFAULT_VAST_VERSION = '3.0';
 

@@ -23,7 +23,7 @@ test('skippable linear ad with skipoffset and progress event with offset', funct
   .attachMediaFile('http://domain.com/file.ext', { id: Date.now() })
 
   t.ok(ad.creatives, 'It should have a `creatives` array');
-  t.ok(skippableLinearCreative, 'It should return creative when attaching a Linear creative');
+  t.ok(skippableLinearCreative, 'It should return ad when attaching a Linear ad');
   
   t.throws(function(){ skippableLinearCreative.attachTrackingEvent('progress', 'http://zing-zang.com') }, 'It should throw an error if offset for TrackingEvent of type `progress` is not provided.');  
   
