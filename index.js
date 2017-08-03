@@ -5,7 +5,7 @@ const Ad = require('./lib/ad/ad');
 
 const DEFAULT_VAST_VERSION = '3.0';
 
-class VAST {
+class VastXml {
   constructor(settings = {}) {
     this._version = settings.version || DEFAULT_VAST_VERSION;
     this._vastErrorURI = settings.vastErrorURI;
@@ -30,14 +30,10 @@ class VAST {
     xmlResponse.initVastDocument(this._version)
       .attachErrorUri(this._vastErrorURI);
 
-    this._ads.forEach(ad => xmlResponse.attachAd(xmlResponse, ad));
+    this._ads.forEach(ad => xmlResponse.attachAd(ad));
 
     return xmlResponse.end(options);
   };
 }
 
-function vastFactory(settings) {
-  return new VAST(settings);
-}
-
-module.exports = vastFactory;
+module.exports = VastXml;

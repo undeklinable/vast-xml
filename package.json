@@ -4,6 +4,7 @@
   "description": "VAST XML responses for online video advertisers.",
   "main": "index.js",
   "dependencies": {
+    "randomstring": "^1.1.5",
     "should": "^11.2.1",
     "underscore": "^1.8.3",
     "xmlbuilder": "9.0.1"

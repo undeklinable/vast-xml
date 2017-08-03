@@ -1,5 +1,8 @@
 {
   "id": 99,
-  "adParameters": "<xml></xml>",
+  "adParameters": {
+   "data": "<xml></xml>",
+    "xmlEncoded": false
+  },
   "duration": "00:00:30"
 }
