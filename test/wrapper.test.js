@@ -1,32 +1,48 @@
-var test = require('tap').test
-  , VAST = require('../index.js')
-  , vast = new VAST();
+const should = require('should');
+const VAST = require('../index.js');
 
-test('Validate ad settings', function(t){
-  t.throws(function(){
-   vast.attachAd({ 
-         structure : 'wrapper'
-       , AdSystem : 'Common name of the ad'
-       , sequence : 23
-     });
-  }, 'It should throw an error if no VASTAdTagURI is set');
-  t.throws(function(){
-   vast.attachAd({ 
-         structure : 'wrapper'
-       , sequence : 23
-       , Error : ''
-       , VASTAdTagURI : 'http://example.com'
-     });
-  }, 'It should throw an error if no AdSystem is set');
-  t.end();
+describe('VAST wrapper test suite', () => {
+  beforeEach(() => {
+    this._vast = new VAST();
+  });
+
+  describe('Error detection', () => {
+    it('should throw an error if no vastAdTagURI is set', done => {
+      try {
+        this._vast.attachAd({ structure : 'wrapper', AdSystem : 'irrelevantSystem', sequence : 23 });
+        done(new Error('should throw error'));
+      } catch (ex) {
+        done();
+      }
+    });
+
+    it('should throw an error if no AdSystem is set', done => {
+      try {
+        this._vast.attachAd({ structure : 'wrapper', vastAdTagURI : 'irrelevantVastUri', sequence : 23 });
+        done(new Error('should throw error'));
+      } catch (ex) {
+        done();
+      }
+    });
+  });
+
+  describe('Wrapper validation', () => {
+    beforeEach(() => {
+      this._ad = this._vast.attachAd({
+        structure: 'wrapper',
+        adSystem: 'irrelevantSystem',
+        sequence: 23,
+        error: 'irrelevantError',
+        vastAdTagURI: 'http://irrelevantDomain.com'
+      }).attachImpression({id: Date.now(), url: 'http://irrelevantDomain.com'});
+    });
+
+    it('should have a tag URI', () => {
+      this._ad.vastAdTagURI.should.equal('http://irrelevantDomain.com');
+    });
+
+    it('should have an impression tracker', () => {
+      this._ad.impressions[0].url.should.equal('http://irrelevantDomain.com');
+    });
+  });
 });
-
-vast.attachAd({ 
-    structure : 'wrapper'
-  , AdSystem : 'Common name of the ad'
-  , sequence : 23
-  , Error: 'http://error.err'
-  , VASTAdTagURI : 'http://example.com'
-}).attachImpression({ id: Date.now(), url : 'http://impression.com' });
-
-module.exports = vast;
