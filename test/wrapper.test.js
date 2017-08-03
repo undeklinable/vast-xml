@@ -44,5 +44,12 @@ describe('VAST wrapper test suite', () => {
     it('should have an impression tracker', () => {
       this._ad.impressions[0].url.should.equal('http://irrelevantDomain.com');
     });
+
+    it('should be able to attach a companion ad', () => {
+      const creative = this._ad.attachCreative('CompanionAd', { width : 300, height : 250 })
+        .attachResource('StaticResource', 'http://irrelevantDomain.com/irrelevantFile.jpg', 'image/jpeg');
+
+      creative.resources[0].uri.should.equal('http://irrelevantDomain.com/irrelevantFile.jpg');
+    });
   });
 });
