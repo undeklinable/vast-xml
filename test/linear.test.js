@@ -3,25 +3,24 @@
 const should = require('should');
 const VAST = require('../index.js');
 
-
-describe.only('Linear VAST test suite', () => {
+describe('Linear VAST test suite', () => {
   beforeEach(() => {
     this._vast = new VAST();
   });
 
   describe('Validate ad mandatory settings', () => {
-    it('It should throw an error if no AdTitle is set', done => {
+    it('It should throw an error if no adTitle is set', done => {
       try {
-        this._vast.attachAd({structure: 'inline', AdSystem: 'irrelevantName'});
+        this._vast.attachAd({structure: 'inline', adSystem: 'irrelevantName'});
         done(new Error('should throw Error'));
       } catch(ex) {
         done();
       }
     });
 
-    it('It should throw an error if no AdSystem is set', done => {
+    it('It should throw an error if no adSystem is set', done => {
       try {
-        this._vast.attachAd({ structure : 'inline' , AdTitle : 'the title', Error : '' });
+        this._vast.attachAd({ structure : 'inline' , adTitle : 'the title', error : '' });
         done(new Error('should throw Error'));
       } catch(ex) {
         done();
@@ -35,10 +34,10 @@ describe.only('Linear VAST test suite', () => {
         id : 1,
         structure : 'inline',
         sequence : 99,
-        AdTitle : 'irrelevantTitle',
-        Error: 'http://error.err',
-        AdSystem : { name: 'irrelevantName', version : '1.0' },
-        Extensions: ['<one><![CDATA[1]]></one>', '<two><dos id = "2" /></two>']
+        adTitle : 'irrelevantTitle',
+        error: 'http://error.err',
+        adSystem : { name: 'irrelevantName', version : '1.0' },
+        extensions: ['<one><![CDATA[1]]></one>', '<two><dos id = "2" /></two>']
       }).attachImpression({ id : 23, url : 'http://impression.com' });
     });
 
@@ -64,7 +63,7 @@ describe.only('Linear VAST test suite', () => {
       should.not.exist(this._ad.wrapper);
     });
 
-    it('should have an AdSystem name', ()  => {
+    it('should have an adSystem name', ()  => {
       this._ad.adSystem.name.should.equal('irrelevantName');
     });
 
@@ -76,7 +75,7 @@ describe.only('Linear VAST test suite', () => {
   describe('vast 2.0 specific settings', () => {
     beforeEach(() => {
       this._vast20 = new VAST({ version : '2.0' });
-      this._ad = this._vast20.attachAd({id : 1, structure : 'inline', AdTitle : 'irrelevantTitle', AdSystem : { name: 'irrelevantName', version : '1.0' }})
+      this._ad = this._vast20.attachAd({id : 1, structure : 'inline', adTitle : 'irrelevantTitle', adSystem : { name: 'irrelevantName', version : '1.0' }})
         .attachImpression({ id : 23, url : 'http://irrelevantUrl.com' });
     });
 
@@ -101,7 +100,7 @@ describe.only('Linear VAST test suite', () => {
 
     describe('VAST Linear creative', () => {
       beforeEach(() => {
-        this._creative = this._ad.attachCreative('Linear', { id: 99, AdParameters : '<xml></xml>', Duration : '00:00:30' })
+        this._creative = this._ad.attachCreative('Linear', { id: 99, adParameters : '<xml></xml>', duration : '00:00:30' })
           .attachMediaFile('http://irrelevantDomain.com/irrelevantFile', { id: Date.now() })
           .attachTrackingEvent('creativeView', 'http://irrelevantDomain.com')
           .attachVideoClick('ClickThrough', 'http://irrelevantDomain.com');
@@ -174,13 +173,13 @@ describe.only('Linear VAST test suite', () => {
     beforeEach(() => {
       this._vastMediaFileTest = new VAST({ version : '2.0' });
       this._adMediaFileTest = this._vastMediaFileTest.attachAd({
-        id : 1, structure : 'inline', AdTitle : 'irrelevantTitle', AdSystem : { name: 'irrelevantName', version : '1.0' }})
+        id : 1, structure : 'inline', adTitle : 'irrelevantTitle', adSystem : { name: 'irrelevantName', version : '1.0' }})
         .attachImpression({ id : 23, url : 'http://impression.com' });
     });
 
     it('should throw an error if no id is set', done => {
       try {
-        this._adMediaFileTest.attachCreative('Linear', {AdParameters: '<xml></xml>', Duration: '00:00:30'})
+        this._adMediaFileTest.attachCreative('Linear', { adParameters: '<xml></xml>', duration: '00:00:30' })
           .attachMediaFile('http://irrelevantDomain/irrelevantFile', {});
         done(new Error('Should throw an exception'));
       } catch(ex) {
@@ -189,7 +188,7 @@ describe.only('Linear VAST test suite', () => {
     });
 
     it('should attach a creative', () => {
-      this._adMediaFileTest.attachCreative('Linear', { AdParameters : '<xml></xml>', Duration : '00:00:30'})
+      this._adMediaFileTest.attachCreative('Linear', { adParameters : '<xml></xml>', duration : '00:00:30'})
         .attachMediaFile('http://domain.com/file.ext', { id: Date.now(), scalable: false });
 
       this._adMediaFileTest.creatives[0].mediaFiles[0].scalable.should.be.false;

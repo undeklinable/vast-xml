@@ -1,56 +1,74 @@
-var test = require('tap').test
-  , VAST = require('../index.js')
-  , vast = new VAST();
+'use strict';
 
-var ad = vast.attachAd({ id : 0, structure : 'inline', sequence : 1, AdTitle : 'Common name of the ad', AdSystem : { name : 'Foo', version : '1.0'} })
-  .attachImpression({ id : 1, url : 'http://impression.com' });
+const should = require('should');
+const VAST = require('../index.js');
 
-var nonLinear = ad.attachCreative('NonLinear', {
-    id : 99
-  , width : 90
-  , height: 10
-  , expandedWidth : 90
-  , expandedHeight : 45
-  , scalable : false
-  , maintainAspectRatio : false
-  , minSuggestedDuration : '00:00:00'
-  , apiFramework : 'VPAID'
+describe('NonLinear VAST test suite', () => {
+  beforeEach(() => {
+    this._vast = new VAST();
+    this._inlineAd = this._vast.attachAd({
+      id : 0,
+      structure : 'inline',
+      sequence : 1,
+      adTitle : 'irrelevantTitle',
+      adSystem : { name : 'Foo', version : '1.0'}
+    }).attachImpression({ id : 1, url : 'http://irrelevantDomain.com' });
+
+    this._nonLinearCreative = this._inlineAd.attachCreative('NonLinear', {
+      id : 99,
+      width : 90,
+      height: 10,
+      expandedWidth : 90,
+      expandedHeight : 45,
+      scalable : false,
+      maintainAspectRatio : false,
+      minSuggestedDuration : '00:00:00',
+      apiFramework : 'VPAID'
+    });
+  });
+
+  it('Non-Linear Ad should have all its attributes', () => {
+    this._nonLinearCreative.id.should.equal(99);
+    this._nonLinearCreative.width.should.equal(90);
+    this._nonLinearCreative.height.should.equal(10);
+    this._nonLinearCreative.expandedWidth.should.equal(90);
+    this._nonLinearCreative.expandedHeight.should.equal(45);
+    this._nonLinearCreative.scalable.should.equal(false);
+    this._nonLinearCreative.maintainAspectRatio.should.equal(false);
+    this._nonLinearCreative.minSuggestedDuration.should.equal('00:00:00');
+    this._nonLinearCreative.apiFramework.should.equal('VPAID');
+  });
+
+  it('should attach resoure to Non-Linear Ad', () => {
+    this._nonLinearCreative.attachResource('StaticResource', 'http://irrelevantDomain.com/irrelevantFile', 'image/png');
+    this._nonLinearCreative.resources.length.should.equal(1);
+    this._nonLinearCreative.resources[0].type.should.equal('StaticResource');
+    this._nonLinearCreative.resources[0].uri.should.equal('http://irrelevantDomain.com/irrelevantFile');
+    this._nonLinearCreative.resources[0].creativeType.should.equal('image/png');
+  });
+
+  it('should attach a click through url', () => {
+    this._nonLinearCreative.attachClickThrough('http://irrelevantDomain.com');
+    this._nonLinearCreative.clickThroughs[0].should.equal('http://irrelevantDomain.com');
+  });
+
+  it('should attach a click track', () => {
+    this._nonLinearCreative.attachClick('http:/irrelevantDomain.com', 'NonLinearClickTracking');
+    this._nonLinearCreative.clicks.length.should.equal(1);
+  });
+
+  it('should override the click with a new one', () => {
+    this._nonLinearCreative.attachClick('http://irrelevantDomain.com', 'NonLinearClickTracking');
+    this._nonLinearCreative.attachClick('http://irrelevantDomain2.com', 'NonLinearClickTracking');
+    this._nonLinearCreative.clicks.length.should.equal(1);
+    this._nonLinearCreative.clicks[0].uri.should.equal('http://irrelevantDomain2.com');
+  });
+
+
+  it('should attach adParameters', () => {
+    this._nonLinearCreative.attachAdParameters('<xml>data</xml>', true);
+    this._nonLinearCreative.adParameters.data.should.equal('<xml>data</xml>');
+    this._nonLinearCreative.adParameters.xmlEncoded.should.be.true;
+  });
 });
 
-test('Create non-linear ad', function(t) {
-  t.equal(nonLinear.attributes.id, 99, 'It should set id of consistent with the creation of the object');
-  t.equal(nonLinear.attributes.width, 90, 'It should set width of consistent with the creation of the object');
-  t.equal(nonLinear.attributes.height,10, 'It should set height of consistent with the creation of the object');
-  t.equal(nonLinear.attributes.expandedWidth, 90, 'It should set expandedWidth of consistent with the creation of the object');
-  t.equal(nonLinear.attributes.expandedHeight, 45, 'It should set expandedHeight of consistent with the creation of the object');
-  t.equal(nonLinear.attributes.scalable, false, 'It should set scalable with the creation of the object');
-  t.equal(nonLinear.attributes.maintainAspectRatio, false, 'It should set maintainAspectRatio with the creation of the object');
-  t.equal(nonLinear.attributes.minSuggestedDuration, '00:00:00', 'It should set minSuggestedDuration with the creation of the object');
-  t.equal(nonLinear.attributes.apiFramework, 'VPAID', 'It should set apiFramework of consistent with the creation of the object');
-
-  t.end();
-});
-
-test('Attach resource to Non-Linear ad', function(t){
-  nonLinear.attachResource('StaticResource', 'http://example.com/file.png', 'image/png');
-  t.equal(nonLinear.resources.length, 1, 'It should add resources');
-  t.equal(nonLinear.resources[0].type, 'StaticResource', 'It should store the type');
-  t.equal(nonLinear.resources[0].uri, 'http://example.com/file.png', 'It should store the uri');
-  t.equal(nonLinear.resources[0].creativeType, 'image/png', 'It should store the creativeType');
-  t.end();
-});
-
-test('Attach non linear click throughs, click trackin and ad parameters', function(t) {
-  nonLinear.attachClick('http://click-through.com');
-  t.equal(nonLinear.clicks[0].uri, 'http://click-through.com', 'It should set a click-through');
-  nonLinear.attachClick({ uri : 'http://click-tracking.com', type : 'NonLinearClickTracking' });
-  t.equal(nonLinear.clicks.length, 1, 'It should create add all tracking click throughs and override the original');
-  nonLinear.attachClick('http://click-through-override.com');
-  t.equal(nonLinear.clicks[0].uri, 'http://click-through-override.com', 'It should override set a click-through with only one');
-  nonLinear.adParameters('<xml>data</xml>', true);
-  t.equal(nonLinear.adParameters.data, '<xml>data</xml>', 'It should set Ad Parameters');
-  t.equal(nonLinear.adParameters.xmlEncoded, true, 'It should set Ad Parameters@xmlEncoded');
-  t.end();
-});
-
-module.exports = vast;
