@@ -1,33 +1,44 @@
-var test = require('tap').test
-  , VAST = require('../index.js')
-  , vast = new VAST();
+'use strict';
 
-test('skippable linear ad with skipoffset and progress event with offset', function(t) {
-  var ad = vast.attachAd({ 
-      id : 1
-    , structure : 'inline'
-    , sequence : 99
-    , AdTitle : 'Common name of the ad'
-    , Error: 'http://error.err'
-    , AdSystem : { name: 'Test Ad Server', version : '1.0' }
-  }).attachImpression({ id : 23, url : 'http://impression.com' });
+const should = require('should');
+const VAST = require('../index.js');
 
-  var skippableLinearCreative = ad.attachCreative('Linear', {
-      id: 99
-    , skipoffset: '00:00:05'
-    , AdParameters : '<xml></xml>'
-    , Duration : '00:00:30'
-  })
-  .attachTrackingEvent('skip', 'http://skipevent.com')
-  .attachTrackingEvent('progress', 'http://zing-zang.com', '00:00:30.000')
-  .attachMediaFile('http://domain.com/file.ext', { id: Date.now() })
+describe('Skippable Linear VAST test suite', () => {
+  beforeEach(() => {
+    this._vast = new VAST();
+    this._linearAd = this._vast.attachAd({
+      id : 1,
+      structure : 'inline',
+      sequence : 99,
+      adTitle : 'irrelevantTitle',
+      error: 'http://irrelevantDomain.err',
+      adSystem : { name: 'irrelevantName', version : '1.0' }
+    }).attachImpression({ id : 23, url : 'http://irrelevantDomain.com' });
 
-  t.ok(ad.creatives, 'It should have a `creatives` array');
-  t.ok(skippableLinearCreative, 'It should return ad when attaching a Linear ad');
-  
-  t.throws(function(){ skippableLinearCreative.attachTrackingEvent('progress', 'http://zing-zang.com') }, 'It should throw an error if offset for TrackingEvent of type `progress` is not provided.');  
-  
-  t.end();
+    this._skippableLinearCreative = this._linearAd.attachCreative('Linear', {
+      id: 99,
+      skipOffset: '00:00:05',
+      adParameters : '<xml></xml>',
+      duration : '00:00:30'
+    }).attachTrackingEvent('skip', 'http://irrelevantDomain.com')
+      .attachTrackingEvent('progress', 'http://irrelevantDomain.com', '00:00:30.000')
+      .attachMediaFile('http://irrelevantDomain.com/irrelevantFile', { id: Date.now() })
+  });
+
+  it('should have an skip offset', () => {
+    this._skippableLinearCreative.skipOffset.should.equal('00:00:05');
+  });
+
+  it('should have a skip notification url', () => {
+    this._skippableLinearCreative.trackingEvents.find(track => track.event === 'skip').url.should.equal('http://irrelevantDomain.com');
+  });
+
+  it('should throw an error if offset for TrackingEvent of type \'progress\' is not provided', done => {
+    try {
+      this._skippableLinearCreative.attachTrackingEvent('progress', 'http://irrelevantDomain.com')
+      done(new Error('should throw error'));
+    } catch(ex) {
+      done();
+    }
+  });
 });
-
-module.exports = vast;
