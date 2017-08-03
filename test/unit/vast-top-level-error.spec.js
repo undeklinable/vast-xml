@@ -1,6 +1,6 @@
 
 const should = require('should');
-const VAST = require('../index.js');
+const VAST = require('../../index.js');
 
 describe('Skippable Linear VAST test suite', () => {
   beforeEach(() => {

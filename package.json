@@ -13,7 +13,7 @@
     "mocha": "3.5.0"
   },
   "scripts": {
-    "test": "node test/index.test.js"
+    "test": "_mocha test/unit/**/*"
   },
   "repository": {
     "type": "git",

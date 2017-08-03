@@ -1,7 +1,7 @@
 'use strict';
 
 const should = require('should');
-const VAST = require('../index.js');
+const VAST = require('../../index.js');
 
 describe('NonLinear VAST test suite', () => {
   beforeEach(() => {

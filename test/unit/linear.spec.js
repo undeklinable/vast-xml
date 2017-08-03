@@ -1,7 +1,12 @@
 'use strict';
 
 const should = require('should');
-const VAST = require('../index.js');
+const VAST = require('../../index.js');
+
+const INLINE_VAST_AD_VALID = require('../data/inlineVASTAdValid.json');
+const INLINE_VAST_AD_NO_SEQUENCE_VALID = require('../data/inlineVASTAdNoSeqValid.json');
+const CREATIVE_VALID = require('../data/creativeValid.json');
+const ICON_VALID = require('../data/iconValid.json');
 
 describe('Linear VAST test suite', () => {
   beforeEach(() => {
@@ -30,15 +35,8 @@ describe('Linear VAST test suite', () => {
 
   describe('Validate VAST basic settings', () => {
     beforeEach(() => {
-      this._ad = this._vast.attachAd({
-        id : 1,
-        structure : 'inline',
-        sequence : 99,
-        adTitle : 'irrelevantTitle',
-        error: 'http://error.err',
-        adSystem : { name: 'irrelevantName', version : '1.0' },
-        extensions: ['<one><![CDATA[1]]></one>', '<two><dos id = "2" /></two>']
-      }).attachImpression({ id : 23, url : 'http://impression.com' });
+      this._ad = this._vast.attachAd(INLINE_VAST_AD_VALID)
+        .attachImpression({ id : 23, url : 'http://irrelevantDomain.com' });
     });
 
     it('It should default to VAST 3.0', () => {
@@ -75,7 +73,7 @@ describe('Linear VAST test suite', () => {
   describe('vast 2.0 specific settings', () => {
     beforeEach(() => {
       this._vast20 = new VAST({ version : '2.0' });
-      this._ad = this._vast20.attachAd({id : 1, structure : 'inline', adTitle : 'irrelevantTitle', adSystem : { name: 'irrelevantName', version : '1.0' }})
+      this._ad = this._vast20.attachAd(INLINE_VAST_AD_NO_SEQUENCE_VALID)
         .attachImpression({ id : 23, url : 'http://irrelevantUrl.com' });
     });
 
@@ -100,7 +98,7 @@ describe('Linear VAST test suite', () => {
 
     describe('VAST Linear creative', () => {
       beforeEach(() => {
-        this._creative = this._ad.attachCreative('Linear', { id: 99, adParameters : '<xml></xml>', duration : '00:00:30' })
+        this._creative = this._ad.attachCreative('Linear', CREATIVE_VALID)
           .attachMediaFile('http://irrelevantDomain.com/irrelevantFile', { id: Date.now() })
           .attachTrackingEvent('creativeView', 'http://irrelevantDomain.com')
           .attachVideoClick('ClickThrough', 'http://irrelevantDomain.com');
@@ -179,7 +177,7 @@ describe('Linear VAST test suite', () => {
 
     it('should throw an error if no id is set', done => {
       try {
-        this._adMediaFileTest.attachCreative('Linear', { adParameters: '<xml></xml>', duration: '00:00:30' })
+        this._adMediaFileTest.attachCreative('Linear', CREATIVE_VALID)
           .attachMediaFile('http://irrelevantDomain/irrelevantFile', {});
         done(new Error('Should throw an exception'));
       } catch(ex) {
@@ -188,7 +186,7 @@ describe('Linear VAST test suite', () => {
     });
 
     it('should attach a creative', () => {
-      this._adMediaFileTest.attachCreative('Linear', { adParameters : '<xml></xml>', duration : '00:00:30'})
+      this._adMediaFileTest.attachCreative('Linear', CREATIVE_VALID)
         .attachMediaFile('http://domain.com/file.ext', { id: Date.now(), scalable: false });
 
       this._adMediaFileTest.creatives[0].mediaFiles[0].scalable.should.be.false;
@@ -196,16 +194,7 @@ describe('Linear VAST test suite', () => {
 
     describe('Attach icons to creative', () => {
       beforeEach(() => {
-        this._icon = this._ad.creatives[0].attachIcon({
-          program : 'irrelevantProgram',
-          height : 250,
-          width : 300,
-          xPosition : 'left',
-          yPosition : 'top',
-          apiFramework : 'VPAID',
-          offset : '01:05:09',
-          duration : '00:00:00'
-        });
+        this._icon = this._ad.creatives[0].attachIcon(ICON_VALID);
       });
 
       it('the creative should have stored the icon', () => {

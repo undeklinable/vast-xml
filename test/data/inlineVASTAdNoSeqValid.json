@@ -1,0 +1,11 @@
+{
+  "id": 1,
+  "structure": "inline",
+  "adTitle": "irrelevantTitle",
+  "error": "http://error.err",
+  "adSystem": {
+    "name": "irrelevantName",
+    "version": "1.0"
+  },
+  "extensions": [ "<one><![CDATA[1]]></one>", "<two><dos id = '2' /></two>" ]
+}

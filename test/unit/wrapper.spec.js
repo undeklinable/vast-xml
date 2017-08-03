@@ -1,5 +1,5 @@
 const should = require('should');
-const VAST = require('../index.js');
+const VAST = require('../../index.js');
 
 describe('VAST wrapper test suite', () => {
   beforeEach(() => {
