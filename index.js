@@ -12,7 +12,7 @@ class VAST {
     this._ads = [];
   }
 
-  attachAd(settings = {}) {
+  attachAd(settings) {
     const ad = new Ad(settings);
     this._ads.push(ad);
     return ad;
@@ -28,18 +28,9 @@ class VAST {
     const xmlResponse = new XmlWriter(options);
 
     xmlResponse.initVastDocument(this._version)
-      .attachErrorUri(this._VASTErrorURI);
+      .attachErrorUri(this._vastErrorURI);
 
-    this._ads.forEach(ad => {
-      xmlResponse.attachAd(xmlResponse, ad);
-
-      insertLinearCreative(ad, track, creatives);
-      insertNonLinearCreative(ad, creatives);
-      insertCompanionAdCreatives(ad, creatives);
-
-      addExtensions(ad, creatives);
-
-    });
+    this._ads.forEach(ad => xmlResponse.attachAd(xmlResponse, ad));
 
     return xmlResponse.end(options);
   };
