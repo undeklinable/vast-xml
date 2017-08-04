@@ -1,0 +1,35 @@
+{
+  "requiredAttributes" : {
+    "inline": [ "adSystem", "adTitle" ],
+    "wrapper": [ "adSystem", "vastAdTagURI" ]
+  },
+  "validVideoClicks": ["ClickThrough", "ClickTracking", "CustomClick"],
+  "validTrackingEventTypes": [
+    "creativeView",
+    "start",
+    "firstQuartile",
+    "midpoint",
+    "thirdQuartile",
+    "complete",
+    "mute",
+    "unmute",
+    "pause",
+    "rewind",
+    "resume",
+    "fullscreen",
+    "exitFullscreen",
+    "expand",
+    "collapse",
+    "acceptInvitationLinear",
+    "closeLinear",
+    "skip",
+    "progress",
+    "close",
+    "acceptInvitation"
+  ],
+  "attributes": {
+    "nonLinearClickThrough": "NonLinearClickThrough",
+    "htmlResource": "HTMLResource",
+    "progress": "progress"
+  }
+}

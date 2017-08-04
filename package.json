@@ -14,7 +14,7 @@
     "mocha": "3.5.0"
   },
   "scripts": {
-    "test": "_mocha test/unit/**/*"
+    "test": "_mocha test/unit/**/* test/validation/**/*"
   },
   "repository": {
     "type": "git",
