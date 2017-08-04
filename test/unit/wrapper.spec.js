@@ -1,6 +1,8 @@
 const should = require('should');
 const VAST = require('../../index.js');
 
+const WRAPPER_VAST_AD_VALID = require('../data/wrapperVASTAdValid.json');
+
 describe('VAST wrapper test suite', () => {
   beforeEach(() => {
     this._vast = new VAST();
@@ -28,13 +30,7 @@ describe('VAST wrapper test suite', () => {
 
   describe('Wrapper validation', () => {
     beforeEach(() => {
-      this._ad = this._vast.attachAd({
-        structure: 'wrapper',
-        adSystem: 'irrelevantSystem',
-        sequence: 23,
-        error: 'irrelevantError',
-        vastAdTagURI: 'http://irrelevantDomain.com'
-      }).attachImpression({id: Date.now(), url: 'http://irrelevantDomain.com'});
+      this._ad = this._vast.attachAd(WRAPPER_VAST_AD_VALID).attachImpression({id: Date.now(), url: 'http://irrelevantDomain.com'});
     });
 
     it('should have a tag URI', () => {
