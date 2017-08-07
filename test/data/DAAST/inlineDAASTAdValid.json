@@ -12,7 +12,7 @@
   "expires": 10,
   "pricing" : {
     "price": 5,
-    "model": "CPC",
+    "model": "cpc",
     "currency": "USD"
   },
   "category": "IAB1-1"
