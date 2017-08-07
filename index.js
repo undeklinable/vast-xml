@@ -1,7 +1,7 @@
 'use strict';
 
 const XmlWriter = require('./lib/xml/xmlWriter');
-const Ad = require('./lib/ad/ad');
+const Ad = require('./lib/ad/vast.ad');
 const Validator = require('./lib/validation/validator');
 
 const DEFAULT_VAST_VERSION = '3.0';
@@ -39,6 +39,11 @@ class VastXml {
 
     return xmlResponse.end(options);
   };
+}
+
+
+class DaastXml {
+
 }
 
 module.exports = VastXml;
