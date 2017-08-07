@@ -1,7 +1,11 @@
 {
-  "requiredAttributes" : {
+  "requiredVASTAttributes" : {
     "inline": [ "adSystem", "adTitle" ],
     "wrapper": [ "adSystem", "vastAdTagURI" ]
+  },
+  "requiredDAASTAttributes" : {
+    "inline": [ "adSystem", "adTitle" ],
+    "wrapper": [ "adSystem", "daastAdTagURI" ]
   },
   "validVideoClicks": ["ClickThrough", "ClickTracking", "CustomClick"],
   "validTrackingEventTypes": [
