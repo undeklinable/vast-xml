@@ -1,5 +1,6 @@
 {
   "vast": "VAST",
+  "daast": "DAAST",
   "version": "version",
   "utf8Encoding": "UTF-8",
   "error": "Error",
@@ -10,6 +11,7 @@
   "adTitle": "AdTitle",
   "description": "Description",
   "vastAdTagURI": "VASTAdTagURI",
+  "daastAdTagURI": "DAASTAdTagURI",
   "inline": "InLine",
   "survey": "Survey",
   "extensions": "Extensions",
@@ -21,6 +23,7 @@
   "companionAd": "CompanionAd",
   "adParameters": "AdParameters",
   "videoClicks": "VideoClicks",
+  "adInteractions": "AdInteractions",
   "companionAds": "CompanionAds",
   "companion": "Companion",
   "duration": "Duration",

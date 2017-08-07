@@ -1,6 +1,6 @@
 'use strict';
 
-const XmlWriter = require('./lib/xml/xmlWriter');
+const XmlWriter = require('./lib/xml/vast.xmlWriter');
 const Ad = require('./lib/ad/vast.ad');
 const Validator = require('./lib/validation/validator');
 
