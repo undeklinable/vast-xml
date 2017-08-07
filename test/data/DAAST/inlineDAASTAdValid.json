@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "structure": "inline",
+  "sequence": 99,
+  "adTitle": "irrelevantTitle",
+  "error": "http://error.err",
+  "adSystem": {
+    "name": "irrelevantName",
+    "version": "1.0"
+  },
+  "extensions": [ "<one><![CDATA[1]]></one>", "<two><dos id = '2' /></two>" ],
+  "expires": 10,
+  "pricing" : {
+    "price": 5,
+    "model": "CPC",
+    "currency": "USD"
+  },
+  "category": "IAB1-1"
+}

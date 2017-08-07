@@ -1,7 +1,7 @@
 const should = require('should');
-const VAST = require('../../index.js');
+const VAST = require('../../index.js').VastXml;
 
-const WRAPPER_VAST_AD_VALID = require('../data/wrapperVASTAdValid.json');
+const WRAPPER_VAST_AD_VALID = require('../data/VAST/wrapperVASTAdValid.json');
 
 describe('VAST wrapper test suite', () => {
   beforeEach(() => {

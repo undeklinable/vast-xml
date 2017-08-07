@@ -1,12 +1,12 @@
 'use strict';
 
 const should = require('should');
-const VAST = require('../../index.js');
+const VAST = require('../../index.js').VastXml;
 
-const INLINE_VAST_AD_VALID = require('../data/inlineVASTAdValid.json');
-const INLINE_VAST_AD_NO_SEQUENCE_VALID = require('../data/inlineVASTAdNoSeqValid.json');
-const CREATIVE_VALID = require('../data/creativeValid.json');
-const ICON_VALID = require('../data/iconValid.json');
+const INLINE_VAST_AD_VALID = require('../data/VAST/inlineVASTAdValid.json');
+const INLINE_VAST_AD_NO_SEQUENCE_VALID = require('../data/VAST/inlineVASTAdNoSeqValid.json');
+const CREATIVE_VALID = require('../data/VAST/creativeValid.json');
+const ICON_VALID = require('../data/VAST/iconValid.json');
 
 describe('Linear VAST test suite', () => {
   beforeEach(() => {

@@ -1,7 +1,7 @@
 'use strict';
 
 const should = require('should');
-const VAST = require('../../index.js');
+const VAST = require('../../index.js').VastXml;
 
 describe('Skippable Linear VAST test suite', () => {
   beforeEach(() => {

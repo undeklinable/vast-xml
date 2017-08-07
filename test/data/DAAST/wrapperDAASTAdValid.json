@@ -1,0 +1,8 @@
+{
+  "id": 1,
+  "structure": "wrapper",
+  "adSystem": "irrelevantSystem",
+  "sequence": 23,
+  "error": "irrelevantError",
+  "daastAdTagURI": "http://irrelevantDomain.com"
+}

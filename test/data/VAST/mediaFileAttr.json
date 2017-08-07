@@ -1,0 +1,8 @@
+{
+  "id": "validMediaFile",
+  "type": "video/irrelevantFormat",
+  "width": "1024",
+  "height": "768",
+  "delivery": "progressive",
+  "scalable": true
+}

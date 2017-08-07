@@ -2,16 +2,16 @@
 
 const fs = require('fs');
 const libxmljs = require('libxmljs');
-const VastXML = require('../../index');
+const VastXML = require('../../index').VastXml;
 
 const defaultOptions = { pretty : true, indent: '  ', newline: '\n' };
 
 const VAST_30_XSD = libxmljs.parseXmlString(fs.readFileSync('/Users/victor/Projects/vast-xml/lib/schemas/vast3_draft.xsd').toString());
-const INLINE_VAST_AD_VALID = require('../data/inlineVASTAdValid.json');
-const INLINE_VAST_AD_NO_SEQUENCE_VALID = require('../data/inlineVASTAdNoSeqValid.json');
-const CREATIVE_VALID = require('../data/creativeValid.json');
-const MEDIA_FILE_ATTR = require('../data/mediaFileAttr.json');
-const WRAPPER_VAST_AD_VALID = require('../data/wrapperVASTAdValid.json');
+const INLINE_VAST_AD_VALID = require('../data/VAST/inlineVASTAdValid.json');
+const INLINE_VAST_AD_NO_SEQUENCE_VALID = require('../data/VAST/inlineVASTAdNoSeqValid.json');
+const CREATIVE_VALID = require('../data/VAST/creativeValid.json');
+const MEDIA_FILE_ATTR = require('../data/VAST/mediaFileAttr.json');
+const WRAPPER_VAST_AD_VALID = require('../data/VAST/wrapperVASTAdValid.json');
 
 describe('validate VAST XML documents', () => {
   beforeEach(() => {

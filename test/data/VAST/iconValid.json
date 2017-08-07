@@ -1,0 +1,10 @@
+{
+  "program" : "irrelevantProgram",
+  "height" : 250,
+  "width" : 300,
+  "xPosition" : "left",
+  "yPosition" : "top",
+  "apiFramework" : "VPAID",
+  "offset" : "01:05:09",
+  "duration" : "00:00:00"
+}
