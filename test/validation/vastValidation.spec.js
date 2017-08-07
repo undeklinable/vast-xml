@@ -6,7 +6,7 @@ const VastXML = require('../../index');
 
 const defaultOptions = { pretty : true, indent: '  ', newline: '\n' };
 
-const VAST_30_XSD = libxmljs.parseXmlString(fs.readFileSync('/Users/victor/Projects/vast-xml/test/files/vast3_draft.xsd').toString());
+const VAST_30_XSD = libxmljs.parseXmlString(fs.readFileSync('/Users/victor/Projects/vast-xml/lib/schemas/vast3_draft.xsd').toString());
 const INLINE_VAST_AD_VALID = require('../data/inlineVASTAdValid.json');
 const INLINE_VAST_AD_NO_SEQUENCE_VALID = require('../data/inlineVASTAdNoSeqValid.json');
 const CREATIVE_VALID = require('../data/creativeValid.json');

@@ -4,13 +4,13 @@
   "description": "VAST XML responses for online video advertisers.",
   "main": "index.js",
   "dependencies": {
-    "randomstring": "^1.1.5",
-    "should": "^11.2.1",
-    "underscore": "^1.8.3",
+    "randomstring": "1.1.5",
+    "should": "11.2.1",
+    "underscore": "1.8.3",
+    "libxmljs": "0.18.7",
     "xmlbuilder": "9.0.1"
   },
   "devDependencies": {
-    "libxmljs": "0.18.7",
     "mocha": "3.5.0"
   },
   "scripts": {
@@ -28,5 +28,12 @@
     "DAAST"
   ],
   "author": "Tom Buchok",
+  "contributors": [
+    {
+      "name": "Víctor Iniesta",
+      "role": "Senior Software Developer",
+      "twitter": "@undeklinable"
+    }
+  ],
   "license": "MIT"
 }

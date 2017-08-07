@@ -2,6 +2,7 @@
 
 const XmlWriter = require('./lib/xml/xmlWriter');
 const Ad = require('./lib/ad/ad');
+const Validator = require('./lib/validation/validator');
 
 const DEFAULT_VAST_VERSION = '3.0';
 
@@ -10,6 +11,10 @@ class VastXml {
     this._version = settings.version || DEFAULT_VAST_VERSION;
     this._vastErrorURI = settings.vastErrorURI;
     this._ads = [];
+  }
+
+  static validate(vastXml, type, version) {
+    return Validator.validateVAST(vastXml, version);
   }
 
   attachAd(settings) {
