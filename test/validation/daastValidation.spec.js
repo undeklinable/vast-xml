@@ -35,6 +35,9 @@ describe('validate DAAST XML documents', () => {
     const xmlObj = libxmljs.parseXmlString(this._daast.xml(defaultOptions));
     const isValidXML = xmlObj.validate(DAAST_11_XSD);
 
+
+    console.log(xmlObj.toString());
+
     if (!isValidXML) {
       throw new Error(`Invalid XML:\n${xmlObj.toString()}\n${xmlObj.validationErrors}`)
     }
