@@ -8,7 +8,7 @@
     "wrapper": [ "adSystem", "daastAdTagURI" ]
   },
   "validVideoClicks": ["ClickThrough", "ClickTracking", "CustomClick"],
-  "validTrackingEventTypes": [
+  "validVASTTrackingEventTypes": [
     "creativeView",
     "start",
     "firstQuartile",
@@ -31,9 +31,25 @@
     "close",
     "acceptInvitation"
   ],
+  "validDAASTTrackingEventTypes": [
+    "creativeView",
+    "start",
+    "firstQuartile",
+    "midpoint",
+    "thirdQuartile",
+    "complete",
+    "mute",
+    "unmute",
+    "pause",
+    "rewind",
+    "resume",
+    "skip",
+    "progress"
+  ],
   "attributes": {
     "nonLinearClickThrough": "NonLinearClickThrough",
     "htmlResource": "HTMLResource",
     "progress": "progress"
-  }
+  },
+  "daastValidMediaAttr": ["id", "bitrate", "minBitrate", "maxBitrate", "codec", "apiFramework", "type", "delivery"]
 }

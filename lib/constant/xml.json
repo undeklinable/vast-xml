@@ -33,5 +33,12 @@
   "tracking": "Tracking",
   "mediaFiles": "MediaFiles",
   "mediaFile": "MediaFile",
-  "nonLinearAds": "NonLinearAds"
+  "nonLinearAds": "NonLinearAds",
+  "expires": "Expires",
+  "pricing": "Pricing",
+  "category": "Category",
+  "clickThrough": "ClickTrough",
+  "customClick": "CustomClick",
+  "clickTracking": "ClickTracking",
+  "skipOffset": "skipoffset"
 }
