@@ -10,7 +10,8 @@ const DAAST_11_XSD = libxmljs.parseXmlString(fs.readFileSync('/Users/victor/Proj
 const INLINE_DAAST_AD_VALID = require('../data/DAAST/inlineDAASTAdValid.json');
 const CREATIVE_VALID = require('../data/DAAST/creativeValid.json');
 const MEDIA_FILE_ATTR = require('../data/DAAST/mediaFileAttr.json');
-const WRAPPER_VAST_AD_VALID = require('../data/DAAST/wrapperDAASTAdValid.json');
+const WRAPPER_DAAST_AD_VALID = require('../data/DAAST/wrapperDAASTAdValid.json');
+const COMPANION_AD_VALID = require('../data/DAAST/companionAdValid.json');
 
 describe('validate DAAST XML documents', () => {
   beforeEach(() => {
@@ -26,8 +27,18 @@ describe('validate DAAST XML documents', () => {
     creative.attachMediaFile('http://irrelevantDAASTCreative.com', MEDIA_FILE_ATTR);
   });
 
+  it.only('should validate an Inline DAAST with companion Ad', () => {
+    const ad = this._daast.attachAd(INLINE_DAAST_AD_VALID);
+    const creative = ad.attachCreative('Linear', CREATIVE_VALID);
+
+    ad.attachImpression({ id : 23, url : 'http://irrelevantDomain.com' });
+    creative.attachVideoClick('ClickThrough', 'http://irrelevantDomain.com');
+    creative.attachMediaFile('http://irrelevantDAASTCreative.com', MEDIA_FILE_ATTR);
+    ad.attachCompanionAd(COMPANION_AD_VALID.resources, COMPANION_AD_VALID.elements, COMPANION_AD_VALID.attributes);
+  });
+
   it('should validate a wrapper DAAST', () => {
-    const ad = this._daast.attachAd(WRAPPER_VAST_AD_VALID);
+    const ad = this._daast.attachAd(WRAPPER_DAAST_AD_VALID);
     ad.attachImpression({ url: 'http://irrelevantDomain.com' });
   });
 

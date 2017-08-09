@@ -40,5 +40,11 @@
   "clickThrough": "ClickTrough",
   "customClick": "CustomClick",
   "clickTracking": "ClickTracking",
-  "skipOffset": "skipoffset"
+  "skipOffset": "skipoffset",
+  "static": "StaticResource",
+  "iframe": "IframeResource",
+  "html": "HTMLResource",
+  "altText": "AltText",
+  "companionClickThrough": "CompanionClickThrough",
+  "companionClickTracking": "CompanionClickTracking"
 }

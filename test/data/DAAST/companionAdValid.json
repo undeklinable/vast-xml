@@ -1,0 +1,24 @@
+{
+  "resources": [{
+    "type": "static",
+    "creativeType": "image/jpg",
+    "uri": "http://irrelevantDomain.com/irrelevantFile"
+  }],
+  "elements": {
+    "altText": "irrelevantAlternativeText",
+    "clickThrough": "http://irrelevantClickThroughDomain.com",
+    "clickTracking": "http://irrelevantClickTrackingDomain.com",
+    "trackingEvents": [{
+      "event": "creativeView",
+      "url": "http://irrelevantEventTrackingDomain.com"
+    }],
+    "adParameters": {
+      "data": "<xml>IrrelevantContent</xml>",
+      "xmlEncoded": false
+    }
+  },
+  "attributes": {
+    "width": 360,
+    "height": 480
+  }
+}
