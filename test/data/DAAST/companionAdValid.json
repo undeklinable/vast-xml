@@ -7,7 +7,6 @@
   "elements": {
     "altText": "irrelevantAlternativeText",
     "clickThrough": "http://irrelevantClickThroughDomain.com",
-    "clickTracking": "http://irrelevantClickTrackingDomain.com",
     "trackingEvents": [{
       "event": "creativeView",
       "url": "http://irrelevantEventTrackingDomain.com"

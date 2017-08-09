@@ -42,7 +42,7 @@
   "clickTracking": "ClickTracking",
   "skipOffset": "skipoffset",
   "static": "StaticResource",
-  "iframe": "IframeResource",
+  "iframe": "IFrameResource",
   "html": "HTMLResource",
   "altText": "AltText",
   "companionClickThrough": "CompanionClickThrough",
